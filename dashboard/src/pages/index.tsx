@@ -1,5 +1,7 @@
-import Image from "next/image";
+import Header from "@/components/header";
 import { Inter } from "next/font/google";
+import Dashboard from "./dashboard";
+import SideMenu from "@/components/sidemenu/SideMenu";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -8,7 +10,10 @@ export default function Home() {
 		<main
 			className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
 		>
-			HIII
+			<Header />
+			<Dashboard />
+			<SideMenu />
+			<Login />
 		</main>
 	);
 }
