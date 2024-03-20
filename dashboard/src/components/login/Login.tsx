@@ -9,7 +9,12 @@ export default function Login() {
 			<>
 				<p>Signed in as {session?.user?.email}</p> <br />
 				<p>welcome {session?.user?.name}</p>
-				<Button variant={"containt"} color={"error"} onClick={() => signOut()}>
+				<Button
+					className="text-white bg-red-600"
+					variant={"contained"}
+					color={"error"}
+					onClick={() => signOut()}
+				>
 					Sign out
 				</Button>
 			</>
@@ -18,7 +23,12 @@ export default function Login() {
 	return (
 		<>
 			<p>Not signed in</p> <br />
-			<Button variant={"containt"} color={"success"} onClick={() => signIn()}>
+			<Button
+				className="text-white bg-green-600"
+				variant={"contained"}
+				color={"success"}
+				onClick={() => signIn()}
+			>
 				Sign in
 			</Button>
 		</>

@@ -6,15 +6,17 @@ import Login from "@/components/Login";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+const Home = () => {
 	return (
-		<main
-			className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-		>
-			<Header />
-			<Dashboard />
-			<SideMenu />
-			<Login />
-		</main>
+		<>
+			<main className="flex justify-center px-6 py-0 m-auto">
+				<Header />
+				<Dashboard />
+				<SideMenu />
+				<Login />
+			</main>
+		</>
 	);
-}
+};
+
+export default Home;
