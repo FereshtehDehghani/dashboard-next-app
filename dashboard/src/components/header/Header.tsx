@@ -12,22 +12,30 @@ import {
 	Menu,
 	Container,
 	Button,
+	useMediaQuery,
 } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 // import {AdbIcon,MenuIcon} from '@mui/icons-material';
 import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
+import ThemeToggleBtn from "../theme/ThemeToggleBtn";
 
 const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
+export type HeaderProps = {
+	ColorModeContext: React.Context<{ colorModeToggle: () => "" }>;
+};
 
-const Header = () => {
+const Header = (props: HeaderProps) => {
+	const { ColorModeContext } = props;
 	const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
 		null
 	);
 	const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
 		null
 	);
+
+	const tabletCheck = useMediaQuery("(min-width:768)");
 
 	const { data: session } = useSession();
 	const userProfileImage = session?.user?.image;
@@ -136,9 +144,13 @@ const Header = () => {
 							</Button>
 						))}
 					</Box>
-					<Box sx={{ paddingRight: 5 }}>
-						<Typography>Sign in as {session?.user?.email}</Typography>
-					</Box>
+					{tabletCheck && (
+						<Box sx={{ paddingRight: 5 }}>
+							<Typography>Sign in as {session?.user?.email}</Typography>
+						</Box>
+					)}
+					<ThemeToggleBtn ColorModeContext={ColorModeContext} />
+
 					<Box sx={{ flexGrow: 0 }}>
 						<Tooltip title="Open profile settings">
 							<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
