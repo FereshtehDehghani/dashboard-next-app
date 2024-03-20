@@ -56,7 +56,7 @@ const Header = (props: HeaderProps) => {
 	};
 
 	return (
-		<AppBar position="static">
+		<AppBar position="static" sx={{ marginBottom: "48px" }}>
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
 					<AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
@@ -78,42 +78,6 @@ const Header = (props: HeaderProps) => {
 						LOGO
 					</Typography>
 
-					<Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-						<IconButton
-							size="large"
-							aria-label="account of current user"
-							aria-controls="menu-appbar"
-							aria-haspopup="true"
-							onClick={handleOpenNavMenu}
-							color="inherit"
-						>
-							<MenuIcon />
-						</IconButton>
-						<Menu
-							id="menu-appbar"
-							anchorEl={anchorElNav}
-							anchorOrigin={{
-								vertical: "bottom",
-								horizontal: "left",
-							}}
-							keepMounted
-							transformOrigin={{
-								vertical: "top",
-								horizontal: "left",
-							}}
-							open={Boolean(anchorElNav)}
-							onClose={handleCloseNavMenu}
-							sx={{
-								display: { xs: "block", md: "none" },
-							}}
-						>
-							{pages.map((page) => (
-								<MenuItem key={page} onClick={handleCloseNavMenu}>
-									<Typography textAlign="center">{page}</Typography>
-								</MenuItem>
-							))}
-						</Menu>
-					</Box>
 					<AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
 					<Typography
 						variant="h5"
@@ -145,7 +109,7 @@ const Header = (props: HeaderProps) => {
 						))}
 					</Box>
 					{tabletCheck && (
-						<Box sx={{ paddingRight: 5 }}>
+						<Box sx={{ paddingRight: 5, marginLeft: "auto" }}>
 							<Typography>Sign in as {session?.user?.email}</Typography>
 						</Box>
 					)}
