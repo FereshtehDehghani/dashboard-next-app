@@ -7,7 +7,7 @@ import TransactionBottomRow from "@/components/dashboard/transactionButtomRow/Tr
 const Dashboard = () => {
 	return (
 		<Box>
-			<Grid container gap={4} marginTop={2}>
+			<Grid container gap={4} marginLeft={5} marginTop={10}>
 				<DataRibbon />
 				<TransactionsPerDay />
 			</Grid>
