@@ -17,9 +17,7 @@ const Data = () => {
 				Tables, on the other hand, provide a structured format for displaying
 				data in a clear and organized manner. They consist of rows and columns,
 				where each row represents a distinct record or entity, and each column
-				represents a specific attribute or variable. Tables are widely used in
-				data visualization, research, reporting, and communication, enabling
-				users to compare, contrast, and interpret data effectively.
+				represents a specific attribute or variable.
 			</p>
 			<div style={{ height: "900px", width: "100%" }}>
 				<DataGrid
