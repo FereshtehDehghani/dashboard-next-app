@@ -14,9 +14,12 @@ const Data = () => {
 		<>
 			<h1>Data</h1>
 			<p>
-				The bestest of data available here at your finger tips in table form.
-				This could be a whole section of data that is available for users to
-				deep dive further into the numbers/stats.
+				Tables, on the other hand, provide a structured format for displaying
+				data in a clear and organized manner. They consist of rows and columns,
+				where each row represents a distinct record or entity, and each column
+				represents a specific attribute or variable. Tables are widely used in
+				data visualization, research, reporting, and communication, enabling
+				users to compare, contrast, and interpret data effectively.
 			</p>
 			<div style={{ height: "900px", width: "100%" }}>
 				<DataGrid
