@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 const Home = () => {
 	return (
 		<>
-			<main className="flex justify-center px-6 py-0 m-auto">
+			<main className="flex justify-center max-w-[85rem] xl:max-w-[92rem]">
 				<Dashboard />
 				<SideMenu />
 				<Login />
