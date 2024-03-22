@@ -1,19 +1,18 @@
-import { useTheme, CssBaseline } from "@mui/material";
-
 import { SessionProvider } from "next-auth/react";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import React, { createContext, useContext } from "react";
-import ThemeToggleBtn from "@/components/theme";
+import React from "react";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { CssBaseline } from "@mui/material";
 import darkTheme from "@/theme/darkTheme";
 import lightTheme from "@/theme/lightTheme";
 import Header from "@/components/header";
 import Sidemenu from "@/components/sidemenu";
+import Layout from "@/components/layout";
 
-const ColorModeContext = createContext({
-	toggleColorMode: () => "",
+const ColorModeContext = React.createContext({
+	toggleColorMode: () => {},
 });
 
-const App = ({ Component, pageProps: { session, ...pageProps } }: any) => {
+const App = ({ Component, pageProps: { session, ...pageProps } }) => {
 	const [mode, setMode] = React.useState<"light" | "dark">("dark");
 	const colorMode = React.useMemo(
 		() => ({
@@ -31,7 +30,6 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: any) => {
 			}),
 		[mode]
 	);
-
 	const lightThemeChosen = React.useMemo(
 		() =>
 			createTheme({
@@ -50,6 +48,9 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: any) => {
 					<Header ColorModeContext={ColorModeContext} />
 					<Sidemenu />
 					<Component {...pageProps} />
+					<Layout>
+						<Component {...pageProps} />
+					</Layout>
 				</SessionProvider>
 			</ThemeProvider>
 		</ColorModeContext.Provider>

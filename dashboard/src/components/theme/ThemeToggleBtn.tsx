@@ -1,4 +1,4 @@
-import { IconButton, Box, useMediaQuery, Typography } from "@mui/material";
+import { IconButton, useMediaQuery } from "@mui/material";
 import React, { useContext } from "react";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
@@ -18,10 +18,10 @@ const ThemeToggleBtn = (props: ThemeToggleButtonProps) => {
 
 	return (
 		<>
-			{mobileCheck && <Typography>{theme?.palette?.mode} mode</Typography>}
+			{/* {mobileCheck && <Typography>{theme?.palette?.mode} </Typography>} */}
 
 			<IconButton
-				sx={{ ml: 1 }}
+				sx={{ mr: 2 }}
 				onClick={colorMode?.toggleColorMode}
 				color="inherit"
 			>

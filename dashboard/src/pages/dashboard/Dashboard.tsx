@@ -1,25 +1,18 @@
-import { Grid, Paper } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import React from "react";
-import scss from "./dashboard.module.scss";
+import DataRibbon from "@/components/dashboard/dataRibbon";
+import TransactionsPerDay from "@/components/dashboard/transactionsPerDay";
+import TransactionBottomRow from "@/components/dashboard/transactionButtomRow/TransactionBottomRow";
 
 const Dashboard = () => {
 	return (
-		<>
-			<Grid container spacing={2} marginY={3} justify="center">
-				<Grid item md={4} xs={12}>
-					<Paper>md=4</Paper>
-				</Grid>
-				<Grid item md={4} xs={12}>
-					<Paper>md=4</Paper>
-				</Grid>
-				<Grid item md={4} xs={12}>
-					<Paper>md=4</Paper>
-				</Grid>
+		<Box>
+			<Grid container gap={4} marginLeft={5} marginTop={10}>
+				<DataRibbon />
+				<TransactionsPerDay />
 			</Grid>
-			<Grid container xs={12} marginY={5}>
-				<Paper>xs=8</Paper>
-			</Grid>
-		</>
+			<TransactionBottomRow />
+		</Box>
 	);
 };
 export default Dashboard;
