@@ -11,7 +11,7 @@ const Home = () => {
 		<>
 			<main className="flex justify-center px-6 py-0 m-auto">
 				<Dashboard />
-				<SideMenu />
+				{/* <SideMenu /> */}
 				<Login />
 			</main>
 		</>

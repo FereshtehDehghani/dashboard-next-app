@@ -7,6 +7,7 @@ import ThemeToggleBtn from "@/components/theme";
 import darkTheme from "@/theme/darkTheme";
 import lightTheme from "@/theme/lightTheme";
 import Header from "@/components/header";
+import Sidemenu from "@/components/sidemenu";
 
 const ColorModeContext = createContext({
 	toggleColorMode: () => "",
@@ -47,6 +48,7 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: any) => {
 				<SessionProvider session={session}>
 					<CssBaseline />
 					<Header ColorModeContext={ColorModeContext} />
+					<Sidemenu />
 					<Component {...pageProps} />
 				</SessionProvider>
 			</ThemeProvider>

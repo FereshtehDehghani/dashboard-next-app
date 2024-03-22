@@ -22,7 +22,6 @@ export default function Login() {
 	}
 	return (
 		<>
-			<p>Not signed in</p> <br />
 			<Button
 				className="text-white bg-green-600"
 				variant={"contained"}
