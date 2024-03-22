@@ -6,6 +6,8 @@ const Home = () => {
 		<>
 			<main className="flex justify-center max-w-[85rem] xl:max-w-[92rem]">
 				<Dashboard />
+				{/* <SideMenu /> */}
+				<Login />
 				<SideMenu />
 			</main>
 		</>

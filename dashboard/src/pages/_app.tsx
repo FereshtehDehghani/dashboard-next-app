@@ -5,6 +5,7 @@ import { CssBaseline } from "@mui/material";
 import darkTheme from "@/theme/darkTheme";
 import lightTheme from "@/theme/lightTheme";
 import Header from "@/components/header";
+import Sidemenu from "@/components/sidemenu";
 import Layout from "@/components/layout";
 
 const ColorModeContext = React.createContext({
@@ -45,6 +46,8 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
 				<SessionProvider session={session}>
 					<CssBaseline />
 					<Header ColorModeContext={ColorModeContext} />
+					<Sidemenu />
+					<Component {...pageProps} />
 					<Layout>
 						<Component {...pageProps} />
 					</Layout>
