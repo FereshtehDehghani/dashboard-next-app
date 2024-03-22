@@ -1,4 +1,4 @@
-import { Box, Grid, Paper } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import React from "react";
 import DataRibbon from "@/components/dashboard/dataRibbon";
 import TransactionsPerDay from "@/components/dashboard/transactionsPerDay";
