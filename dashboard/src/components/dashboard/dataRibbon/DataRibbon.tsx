@@ -1,12 +1,12 @@
-import DataCard from "../dataCard/DataCard";
-import React from "./index";
+import React from "react";
 import { Grid } from "@mui/material";
 import style from "./dataRibbon.module.scss";
+import DataCard from "../dataCard";
 
 const DataRibbon = () => {
 	return (
-		<Grid container gap={2} className={style.dataRibbon}>
-			<Grid>
+		<Grid container xs={12} gap={2} className={style.dataRibbon}>
+			<Grid item>
 				<DataCard
 					title={"Total Sales"}
 					value={"462"}
@@ -15,14 +15,14 @@ const DataRibbon = () => {
 					}
 				/>
 			</Grid>
-			<Grid>
+			<Grid item>
 				<DataCard
 					title={"Total Value"}
 					value={"$25,732.53"}
 					description={"The total sales of the current financial year"}
 				/>
 			</Grid>
-			<Grid>
+			<Grid item>
 				<DataCard
 					title={"Avg. Order Value"}
 					value={"$159.30"}
@@ -31,7 +31,7 @@ const DataRibbon = () => {
 					}
 				/>
 			</Grid>
-			<Grid>
+			<Grid item>
 				<DataCard
 					title={"Conversion rate"}
 					value={"0.61%"}

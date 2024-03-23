@@ -1,11 +1,11 @@
-import { SessionProvider } from "next-auth/react";
+import { ClerkProvider } from "@clerk/nextjs";
 import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 import darkTheme from "@/theme/darkTheme";
 import lightTheme from "@/theme/lightTheme";
 import Header from "@/components/header";
-import Sidemenu from "@/components/sidemenu";
+import SideMenu from "@/components/sideMenu";
 import Layout from "@/components/layout";
 
 const ColorModeContext = React.createContext({
@@ -43,15 +43,14 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
 			<ThemeProvider
 				theme={mode === "dark" ? darkThemeChosen : lightThemeChosen}
 			>
-				<SessionProvider session={session}>
+				<ClerkProvider {...pageProps}>
 					<CssBaseline />
 					<Header ColorModeContext={ColorModeContext} />
-					<Sidemenu />
-					<Component {...pageProps} />
+					<SideMenu />
 					<Layout>
 						<Component {...pageProps} />
 					</Layout>
-				</SessionProvider>
+				</ClerkProvider>
 			</ThemeProvider>
 		</ColorModeContext.Provider>
 	);
