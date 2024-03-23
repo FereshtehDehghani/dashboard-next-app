@@ -5,7 +5,7 @@ import DataCard from "../dataCard";
 
 const DataRibbon = () => {
 	return (
-		<Grid container xs={12} gap={2} className={style.dataRibbon}>
+		<Grid container gap={2} className={style.dataRibbon}>
 			<Grid item>
 				<DataCard
 					title={"Total Sales"}
