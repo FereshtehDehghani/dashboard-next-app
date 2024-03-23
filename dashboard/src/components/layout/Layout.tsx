@@ -19,6 +19,7 @@ const Layout = (props: any) => {
 			>
 				<SideMenu />
 				{props.children}
+
 				<Footer />
 			</main>
 		</>

@@ -6,7 +6,6 @@ import darkTheme from "@/theme/darkTheme";
 import lightTheme from "@/theme/lightTheme";
 import Header from "@/components/header";
 import Layout from "@/components/layout";
-import SideMenu from "@/components/sidemenu/SideMenu";
 
 const ColorModeContext = React.createContext({
 	toggleColorMode: () => {},
@@ -46,7 +45,6 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
 				<ClerkProvider {...pageProps}>
 					<CssBaseline />
 					<Header ColorModeContext={ColorModeContext} />
-					<SideMenu />
 					<Layout>
 						<Component {...pageProps} />
 					</Layout>
