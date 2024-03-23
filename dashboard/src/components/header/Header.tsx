@@ -1,5 +1,4 @@
 import React from "react";
-import { signIn, signOut, useSession } from "next-auth/react";
 import {
 	Avatar,
 	AppBar,
@@ -13,20 +12,24 @@ import {
 	Container,
 	Button,
 	useMediaQuery,
+	useTheme,
 } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
 // import {AdbIcon,MenuIcon} from '@mui/icons-material';
 import MenuIcon from "@mui/icons-material/Menu";
 import AdbIcon from "@mui/icons-material/Adb";
 import ThemeToggleBtn from "../theme/ThemeToggleBtn";
+import { SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs";
+import { Login, Logout } from "@mui/icons-material";
+import Link from "next/link";
 
-// const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 export type HeaderProps = {
 	ColorModeContext: React.Context<{ colorModeToggle: () => "" }>;
 };
 
 const Header = (props: HeaderProps) => {
+	const theme = useTheme();
 	const { ColorModeContext } = props;
 	const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
 		null
@@ -37,8 +40,9 @@ const Header = (props: HeaderProps) => {
 
 	const tabletCheck = useMediaQuery("(min-width:768)");
 
-	const { data: session } = useSession();
-	const userProfileImage = session?.user?.image;
+	const { user } = useUser();
+	console.log("user is", user);
+	const userProfileImage = user?.imageUrl;
 
 	const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorElNav(event.currentTarget);
@@ -56,7 +60,7 @@ const Header = (props: HeaderProps) => {
 	};
 
 	return (
-		<AppBar marginX="5px" position="fixed" sx={{ marginBottom: "48px" }}>
+		<AppBar position="fixed" sx={{ marginBottom: "48px" }}>
 			<Container maxWidth="xl">
 				<Toolbar
 					disableGutters
@@ -123,43 +127,74 @@ const Header = (props: HeaderProps) => {
 					>
 						{tabletCheck && (
 							<Box sx={{ paddingRight: 5, marginLeft: "auto" }}>
-								<Typography>Sign in as {session?.user?.email}</Typography>
+								<Typography>Sign in as {user?.user?.email}</Typography>
 							</Box>
 						)}
 						<ThemeToggleBtn ColorModeContext={ColorModeContext} />
 
 						<Box sx={{ flexGrow: 0, marginLeft: "10px" }}>
-							<Tooltip title="Open profile settings">
-								<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-									{userProfileImage ? (
-										<Avatar alt="Remy Sharp" src={userProfileImage} />
-									) : (
-										<Avatar sx={{ bgcolor: deepOrange[500] }}>F</Avatar>
-									)}
-								</IconButton>
-							</Tooltip>
-							<Menu
-								sx={{ mt: "45px" }}
-								id="menu-appbar"
-								anchorEl={anchorElUser}
-								anchorOrigin={{
-									vertical: "top",
-									horizontal: "right",
-								}}
-								keepMounted
-								transformOrigin={{
-									vertical: "top",
-									horizontal: "right",
-								}}
-								open={Boolean(anchorElUser)}
-								onClose={handleCloseUserMenu}
-							>
-								<MenuItem onClick={() => (session ? signOut : signIn)}>
-									<Typography textAlign="center">
-										{session ? "Logout" : "Login"}
-									</Typography>
-								</MenuItem>
-							</Menu>
+							<SignedIn>
+								<UserButton
+									afterSignOutUrl="/"
+									appearance={{
+										elements: {
+											avatarBox: "h-10 w-10",
+										},
+										variables: {
+											colorPrimary: "#ff7000",
+										},
+									}}
+								/>{" "}
+							</SignedIn>
+							{!userProfileImage && (
+								<SignedOut>
+									<Tooltip title="Open profile settings">
+										<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+											<UserButton />
+											<Avatar sx={{ bgcolor: deepOrange[500] }} src="" />
+										</IconButton>
+									</Tooltip>
+									<Menu
+										sx={{ mt: "45px" }}
+										id="menu-appbar"
+										anchorEl={anchorElUser}
+										anchorOrigin={{
+											vertical: "top",
+											horizontal: "right",
+										}}
+										keepMounted
+										transformOrigin={{
+											vertical: "top",
+											horizontal: "right",
+										}}
+										open={Boolean(anchorElUser)}
+										onClose={handleCloseUserMenu}
+									>
+										<MenuItem>
+											<Link
+												href={"/sign-in"}
+												style={{
+													color: theme.palette.text.primary,
+													textDecoration: "none",
+												}}
+											>
+												Login
+											</Link>
+										</MenuItem>
+										<MenuItem>
+											<Link
+												href={"/sign-up"}
+												style={{
+													color: theme.palette.text.primary,
+													textDecoration: "none",
+												}}
+											>
+												Sign Up
+											</Link>
+										</MenuItem>
+									</Menu>
+								</SignedOut>
+							)}
 						</Box>
 					</Box>
 				</Toolbar>

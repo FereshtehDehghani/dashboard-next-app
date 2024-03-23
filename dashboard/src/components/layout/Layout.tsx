@@ -1,13 +1,10 @@
 import style from "./layout.module.scss";
-import { useSession } from "next-auth/react";
 import React from "react";
 import Head from "next/head";
 import Footer from "@/components/footer";
 import SideMenu from "../sidemenu/SideMenu";
 
 const Layout = (props: any) => {
-	const { data: session } = useSession();
-
 	return (
 		<>
 			<Head>
@@ -18,9 +15,9 @@ const Layout = (props: any) => {
 			</Head>
 			<main
 				className={style.layout}
-				style={{ padding: session ? "0 24px 0 80px" : 0 }}
+				// style={{ padding: session ? "0 24px 0 80px" : 0 }}
 			>
-				{session && <SideMenu />}
+				<SideMenu />
 				{props.children}
 				<Footer />
 			</main>

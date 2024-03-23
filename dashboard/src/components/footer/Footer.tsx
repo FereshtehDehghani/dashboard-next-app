@@ -1,10 +1,11 @@
 import React from "react";
-import { signIn, signOut, useSession } from "next-auth/react";
+// import { signIn, signOut, useSession } from "next-auth/react";
 import Button from "@mui/material/Button";
 import { Paper, useTheme } from "@mui/material";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import style from "./footer.module.scss";
+import { useSession } from "@clerk/nextjs";
 
 const Footer = () => {
 	const { data: session } = useSession();
@@ -48,7 +49,7 @@ const Footer = () => {
 						<Button
 							variant={"text"}
 							color={session ? "error" : "success"}
-							onClick={() => (session ? signOut() : signIn())}
+							// onClick={() => (session ? signOut() : signIn())}
 						>
 							{session ? "Sign Out" : "Sign In"}
 						</Button>

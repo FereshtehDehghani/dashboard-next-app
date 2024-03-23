@@ -1,33 +1,34 @@
 import * as React from "react";
 import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
-import MuiDrawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import { useMediaQuery } from "@mui/material";
 import {
-	Equalizer,
-	ExitToApp,
-	Home,
-	Person2,
-	Settings,
-} from "@mui/icons-material";
+	List,
+	Divider,
+	IconButton,
+	ListItem,
+	ListItemButton,
+	ListItemText,
+	ListItemIcon,
+} from "@mui/material";
+import MuiDrawer from "@mui/material/Drawer";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import { useMediaQuery } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import { Equalizer, ExitToApp, Person2, Settings } from "@mui/icons-material";
 import Link from "next/link";
-import style from "./sideMenu.module.scss";
-import { signOut } from "next-auth/react";
+import { SignedIn, UserButton, useClerk } from "@clerk/nextjs";
+import { useRouter } from "next/router";
 
 const drawerWidth = 240;
 
 // menu items
 const menuRouteList = ["data", "profile", "settings", "logout"];
 const menuListTranslations = ["Data", "Profile", "Settings", "Log Out"];
-const menuListIcons = [<Equalizer />, <Person2 />, <Settings />, <ExitToApp />];
+const menuListIcons = [
+	<Equalizer key="Equalizer" />,
+	<Person2 key="person2" />,
+	<Settings key="settings" />,
+	<ExitToApp key="exiteToAdd" />,
+];
 
 const openedMixin = (theme: Theme): CSSObject => ({
 	width: drawerWidth,
@@ -63,13 +64,16 @@ const SideMenu = () => {
 	const theme = useTheme();
 	const [open, setOpen] = React.useState(false);
 
+	const { signOut } = useClerk();
+	const router = useRouter();
+
 	const handleToggleDrawer = () => {
 		setOpen(!open);
 	};
 	const isMobileDevice = useMediaQuery("(min-width:600px)");
 
 	const handleListButtonClick = (text: string) => {
-		text === "Sign Out" ? signOut() : null;
+		text === "Log Out" ? signOut(() => router.push("/")) : null;
 		setOpen(false);
 	};
 
@@ -107,8 +111,15 @@ const SideMenu = () => {
 				{menuListTranslations.map((text, index) => (
 					<ListItem key={text} disablePadding sx={{ display: "block" }}>
 						<Link
-							className={style.link}
-							href={`/dashboard/${menuRouteList[index]}`}
+							style={{
+								color: theme.palette.text.primary,
+								textDecoration: "none",
+							}}
+							href={
+								menuRouteList[index] !== "logout"
+									? `/dashboard/${menuRouteList[index]}`
+									: "/"
+							}
 						>
 							<ListItemButton
 								title={text}
@@ -134,6 +145,21 @@ const SideMenu = () => {
 						</Link>
 					</ListItem>
 				))}
+				<ListItem>
+					<SignedIn>
+						<UserButton
+							afterSignOutUrl="/"
+							appearance={{
+								elements: {
+									avatarBox: "h-10 w-10",
+								},
+								variables: {
+									colorPrimary: "#ff7000",
+								},
+							}}
+						/>
+					</SignedIn>
+				</ListItem>
 			</List>
 		</MuiDrawer>
 	);

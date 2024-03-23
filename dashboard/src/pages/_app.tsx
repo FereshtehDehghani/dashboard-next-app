@@ -1,4 +1,4 @@
-import { SessionProvider } from "next-auth/react";
+import { ClerkProvider } from "@clerk/nextjs";
 import React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
@@ -42,13 +42,13 @@ const App = ({ Component, pageProps: { session, ...pageProps } }) => {
 			<ThemeProvider
 				theme={mode === "dark" ? darkThemeChosen : lightThemeChosen}
 			>
-				<SessionProvider session={session}>
+				<ClerkProvider {...pageProps}>
 					<CssBaseline />
 					<Header ColorModeContext={ColorModeContext} />
 					<Layout>
 						<Component {...pageProps} />
 					</Layout>
-				</SessionProvider>
+				</ClerkProvider>
 			</ThemeProvider>
 		</ColorModeContext.Provider>
 	);
