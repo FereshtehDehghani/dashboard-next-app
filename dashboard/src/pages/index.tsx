@@ -1,4 +1,3 @@
-import Login from "@/components/login";
 import Dashboard from "./dashboard";
 
 const Home = () => {
